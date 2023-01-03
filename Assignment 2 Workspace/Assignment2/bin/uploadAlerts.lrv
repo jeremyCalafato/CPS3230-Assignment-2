@@ -1,0 +1,63 @@
+GLOBAL 
+{
+    VARIABLES
+    {
+
+    }
+
+    EVENTS
+    {
+    	unsuccessfullyPostAlerts() = {*.unsuccessfullyPostAlerts()}
+		successfullyPostAlerts() = {*.successfullyPostAlerts()}
+		unintendedNumberOfAlertsPosted() = {*.unintendedNumberOfAlertsPosted()}
+		intendedNumberOfAlertsPosted() = {*.intendedNumberOfAlertsPosted()}
+		alertsCorrectlyPosted() = {*.alertsCorrectlyPosted()}
+		alertsIncorrectlyPosted() = {*.alertsIncorrectlyPosted()}
+		alertsDeleted() = {*.alertsDeleted()}
+		alertsNotDeleted() = {*.alertsNotDeleted()}
+    }
+
+    PROPERTY alertUploadAndDelete
+    {
+        STATES
+        {
+        	ACCEPTING
+        	{	
+        		unwantedListOfAlerts
+        		populatedListOfAlertsContainingUnintendedNumberOfAlerts
+                incorrectlyPopulatedListOfAlerts
+                correctlyPopulatedListOfAlerts
+                emptyListOfAlerts
+        	}
+        	
+            BAD
+            {
+				
+            }
+            
+            NORMAL
+            {
+                populatedListOfAlerts
+                populatedListOfAlertsContainingIntendedNumberOfAlerts
+            }
+            
+            STARTING
+            {
+                viewingAlerts
+            }
+        }
+            
+        TRANSITIONS
+        {
+            %%first state -> second state [event\condition\action;]
+            viewingAlerts -> unwantedListOfAlerts [alertsNotDeleted \\ System.out.println("viewingAlerts -> unwantedListOfAlerts");]
+            viewingAlerts -> emptyListOfAlerts [alertsDeleted \\ System.out.println("viewingAlerts -> emptyListOfAlerts");]
+            emptyListOfAlerts -> emptyListOfAlerts [unsuccessfullyPostAlerts \\ System.out.println("emptyListOfAlerts -> emptyListOfAlerts");]
+            emptyListOfAlerts -> populatedListOfAlerts [successfullyPostAlerts \\ System.out.println("emptyListOfAlerts -> populatedListOfAlerts");]
+            populatedListOfAlerts -> populatedListOfAlertsContainingUnintendedNumberOfAlerts [unintendedNumberOfAlertsPosted \\ System.out.println("populatedListOfAlerts -> populatedListOfAlertsContainingUnintendedNumberOfAlerts");]
+            populatedListOfAlerts -> populatedListOfAlertsContainingIntendedNumberOfAlerts [intendedNumberOfAlertsPosted \\ System.out.println("populatedListOfAlerts -> populatedListOfAlertsContainingIntendedNumberOfAlerts");]
+            populatedListOfAlertsContainingIntendedNumberOfAlerts -> incorrectlyPopulatedListOfAlerts [alertsIncorrectlyPosted \\ System.out.println("populatedListOfAlertsContainingIntendedNumberOfAlerts -> incorrectlyPopulatedListOfAlerts");]
+            populatedListOfAlertsContainingIntendedNumberOfAlerts -> correctlyPopulatedListOfAlerts [alertsCorrectlyPosted \\ System.out.println("populatedListOfAlertsContainingIntendedNumberOfAlerts -> correctlyPopulatedListOfAlerts");]
+        }
+    }
+}

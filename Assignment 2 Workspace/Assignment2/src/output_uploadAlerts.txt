@@ -1,0 +1,12 @@
+[alertUploadAndDelete]AUTOMATON::> alertUploadAndDelete() STATE::>viewingAlerts
+viewingAlerts -> emptyListOfAlerts
+[alertUploadAndDelete]MOVED ON METHODCALL: void main.alertsRunner.alertsDeleted() TO STATE::> (((SYSTEM REACHED AN ACCEPTED STATE)))  emptyListOfAlerts
+[alertUploadAndDelete]AUTOMATON::> alertUploadAndDelete() STATE::>emptyListOfAlerts
+emptyListOfAlerts -> populatedListOfAlerts
+[alertUploadAndDelete]MOVED ON METHODCALL: void main.alertsRunner.successfullyPostAlerts() TO STATE::> populatedListOfAlerts
+[alertUploadAndDelete]AUTOMATON::> alertUploadAndDelete() STATE::>populatedListOfAlerts
+populatedListOfAlerts -> populatedListOfAlertsContainingIntendedNumberOfAlerts
+[alertUploadAndDelete]MOVED ON METHODCALL: void main.alertsRunner.intendedNumberOfAlertsPosted() TO STATE::> populatedListOfAlertsContainingIntendedNumberOfAlerts
+[alertUploadAndDelete]AUTOMATON::> alertUploadAndDelete() STATE::>populatedListOfAlertsContainingIntendedNumberOfAlerts
+populatedListOfAlertsContainingIntendedNumberOfAlerts -> correctlyPopulatedListOfAlerts
+[alertUploadAndDelete]MOVED ON METHODCALL: void main.alertsRunner.alertsCorrectlyPosted() TO STATE::> (((SYSTEM REACHED AN ACCEPTED STATE)))  correctlyPopulatedListOfAlerts

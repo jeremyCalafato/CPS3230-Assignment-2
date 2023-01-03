@@ -1,0 +1,10 @@
+[alertUploadAndDelete]AUTOMATON::> alertUploadAndDelete() STATE::>viewingAlerts
+[alertUploadAndDelete]AUTOMATON::> alertUploadAndDelete() STATE::>viewingAlerts
+viewingAlerts -> populatedListOfAlerts
+[alertUploadAndDelete]MOVED ON METHODCALL: void main.alertsRunner.successfullyPostAlerts() TO STATE::> populatedListOfAlerts
+[alertUploadAndDelete]AUTOMATON::> alertUploadAndDelete() STATE::>populatedListOfAlerts
+populatedListOfAlerts -> populatedListOfAlertsContainingIntendedNumberOfAlerts
+[alertUploadAndDelete]MOVED ON METHODCALL: void main.alertsRunner.intendedNumberOfAlertsPosted() TO STATE::> populatedListOfAlertsContainingIntendedNumberOfAlerts
+[alertUploadAndDelete]AUTOMATON::> alertUploadAndDelete() STATE::>populatedListOfAlertsContainingIntendedNumberOfAlerts
+populatedListOfAlertsContainingIntendedNumberOfAlerts -> correctlyPopulatedListOfAlerts
+[alertUploadAndDelete]MOVED ON METHODCALL: void main.alertsRunner.alertsCorrectlyPosted() TO STATE::> correctlyPopulatedListOfAlerts

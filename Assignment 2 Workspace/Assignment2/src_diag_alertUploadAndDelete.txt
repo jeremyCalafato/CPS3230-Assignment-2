@@ -1,0 +1,15 @@
+digraph _logic_alertUploadAndDelete {
+rankdir=LR;
+node [shape = doublecircle]; unwantedListOfAlerts populatedListOfAlertsContainingUnintendedNumberOfAlerts incorrectlyPopulatedListOfAlerts correctlyPopulatedListOfAlerts emptyListOfAlerts;
+node [shape = circle]; populatedListOfAlerts populatedListOfAlertsContainingIntendedNumberOfAlerts viewingAlerts;
+node [shape = point]; _s_s;
+_s_s -> viewingAlerts;
+populatedListOfAlerts -> populatedListOfAlertsContainingUnintendedNumberOfAlerts [ label = "(1) unintendedNumberOfAlertsPosted\\\\System . out . println ( \" populatedListOfAlerts -> populatedListOfAlertsContainingUnintendedNumberOfAlerts \" ) ; "];
+populatedListOfAlerts -> populatedListOfAlertsContainingIntendedNumberOfAlerts [ label = "(2) intendedNumberOfAlertsPosted\\\\System . out . println ( \" populatedListOfAlerts -> populatedListOfAlertsContainingIntendedNumberOfAlerts \" ) ; "];
+emptyListOfAlerts -> emptyListOfAlerts [ label = "(1) unsuccessfullyPostAlerts\\\\System . out . println ( \" emptyListOfAlerts -> emptyListOfAlerts \" ) ; "];
+emptyListOfAlerts -> populatedListOfAlerts [ label = "(2) successfullyPostAlerts\\\\System . out . println ( \" emptyListOfAlerts -> populatedListOfAlerts \" ) ; "];
+viewingAlerts -> unwantedListOfAlerts [ label = "(1) alertsNotDeleted\\\\System . out . println ( \" viewingAlerts -> unwantedListOfAlerts \" ) ; "];
+viewingAlerts -> emptyListOfAlerts [ label = "(2) alertsDeleted\\\\System . out . println ( \" viewingAlerts -> emptyListOfAlerts \" ) ; "];
+populatedListOfAlertsContainingIntendedNumberOfAlerts -> incorrectlyPopulatedListOfAlerts [ label = "(1) alertsIncorrectlyPosted\\\\System . out . println ( \" populatedListOfAlertsContainingIntendedNumberOfAlerts -> incorrectlyPopulatedListOfAlerts \" ) ; "];
+populatedListOfAlertsContainingIntendedNumberOfAlerts -> correctlyPopulatedListOfAlerts [ label = "(2) alertsCorrectlyPosted\\\\System . out . println ( \" populatedListOfAlertsContainingIntendedNumberOfAlerts -> correctlyPopulatedListOfAlerts \" ) ; "];
+}
