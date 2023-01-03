@@ -1,0 +1,25 @@
+States:
+- viewingAlerts (Start State)
+- populatedListOfAlerts
+- populatedListOfAlertsContainingIntendedNumberOfAlerts
+- unwantedListOfAlerts (End State)
+- populatedListOfAlertsContainingUnintendedNumberOfAlerts (End State)
+- incorrectlyPopulatedListOfAlerts (End State)
+- correctlyPopulatedListOfAlerts (End State)
+- emptyListOfAlerts (End State)
+
+Variables:
+- alertsDeleted
+- alertsPosted
+- intendedNumberOfAlertsPosted
+- alertsCorrectlyPosted
+
+Transitions:
+viewingAlerts -> unwantedListOfAlerts                                                     \ alertsNotDeleted               \ alertsDeleted = false; alertsPosted = false; intendedNumberOfAlertsPosted = false; alertsCorrectlyPosted = false
+viewingAlerts -> emptyListOfAlerts                                                        \ alertsDeleted                  \ alertsDeleted = true; alertsPosted = false; intendedNumberOfAlertsPosted = false; alertsCorrectlyPosted = false
+emptyListOfAlerts -> emptyListOfAlerts                                                    \ unsuccessfullyPostAlerts       \ alertsDeleted = true; alertsPosted = false; intendedNumberOfAlertsPosted = false; alertsCorrectlyPosted = false
+emptyListOfAlerts -> populatedListOfAlerts                                                \ successfullyPostAlerts         \ alertsDeleted = true; alertsPosted = true; intendedNumberOfAlertsPosted = false; alertsCorrectlyPosted = false
+populatedListOfAlerts -> populatedListOfAlertsContainingUnintendedNumberOfAlerts          \ unintendedNumberOfAlertsPosted \ alertsDeleted = true; alertsPosted = true; intendedNumberOfAlertsPosted = false; alertsCorrectlyPosted = false
+populatedListOfAlerts -> populatedListOfAlertsContainingIntendedNumberOfAlerts            \ intendedNumberOfAlertsPosted   \ alertsDeleted = true; alertsPosted = true; intendedNumberOfAlertsPosted = true; alertsCorrectlyPosted = false
+populatedListOfAlertsContainingIntendedNumberOfAlerts -> incorrectlyPopulatedListOfAlerts \ alertsIncorrectlyPosted        \ alertsDeleted = true; alertsPosted = true; intendedNumberOfAlertsPosted = true; alertsCorrectlyPosted = false
+populatedListOfAlertsContainingIntendedNumberOfAlerts -> correctlyPopulatedListOfAlerts   \ alertsCorrectlyPosted          \ alertsDeleted = true; alertsPosted = true; intendedNumberOfAlertsPosted = true; alertsCorrectlyPosted = true

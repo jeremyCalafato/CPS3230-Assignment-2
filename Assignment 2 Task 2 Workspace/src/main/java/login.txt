@@ -1,0 +1,18 @@
+States:
+- Involuntarily Logged Out (Start State)
+- Error 401 (End State)
+- Logged In
+- Viewing Alerts (End State)
+- Voluntarily Logged Out (End State)
+
+Variables:
+- loggedOut (bool)
+- loggedIn (bool)
+- viewingAlerts (bool)
+
+Transitions:
+- Involuntarily Logged Out -> Error 401    \ incorrectLogin \ loggedOut = true; loggedIn = false; viewingAlerts = false;
+- Involuntarily Logged Out -> Logged In    \ correctLogin   \ loggedOut = false; loggedIn = true; viewingAlerts = false;
+- Logged In -> Viewing Alerts              \ viewAlerts     \ loggedOut = false; loggedIn = true; viewingAlerts = true;
+- Logged In -> Voluntarily Logged Out      \ logout         \ loggedOut = true; loggedIn = false; viewingAlerts = false;
+- Viewing Alerts -> Voluntarily Logged Out \ logout         \ loggedOut = true; loggedIn = false; viewingAlerts = false;
